@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+cmake_build
+dist/
+releases/
+pkg/dist/arch/
+pkg/dist/fedora/
+pkg/dist/rpi/
