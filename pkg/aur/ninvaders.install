@@ -1,0 +1,8 @@
+post_install() {
+  printf "%b\n" "${mppin}"
+}
+
+read -d '' mppin <<'EOF'
+Additional info at:
+  - https://github.com/doctorfree/ninvaders#readme
+EOF

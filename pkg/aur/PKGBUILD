@@ -1,0 +1,80 @@
+# Maintainer: Ronald Record <github@ronrecord.com>
+
+# Get the version and release from the VERSION file
+# Move to use of pkgver() function with something like this:
+#   git describe --long | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+#
+if [ -f VERSION ]
+then
+  . ./VERSION
+else
+  [ "${SRC}" ] || SRC="${HOME}/src/ninvaders"
+  if [ -f ${SRC}/VERSION ]
+  then
+    . ${SRC}/VERSION
+  else
+    VERSION=1.0.0
+    RELEASE=1
+    PACKAGE=1
+  fi
+fi
+
+pkgname=ninvaders
+pkgver=v${VERSION}r${RELEASE}
+pkgrel=${PACKAGE}
+pkgdesc="Convert any format image file to an Ascii Art text file"
+arch=('x86_64' 'armv7h')
+url="https://github.com/doctorfree/ninvaders"
+license=('GPL2')
+depends=('curl' 'libjpeg' 'libpng' 'imagemagick')
+makedepends=('pandoc' 'zip' 'doxygen' 'autoconf-archive' 'git')
+install=ninvaders.install
+source=("${pkgname}::git+https://github.com/doctorfree/ninvaders.git")
+sha256sums=('SKIP')
+
+prepare() {
+  cd "${srcdir}/${pkgname}"
+  autoreconf -vi
+}
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  ./configure --prefix=/usr --enable-curl --enable-termlib
+  make clean
+  make -j
+  chmod +x src/jp2a
+}
+
+package() {
+  cd "${srcdir}/${pkgname}"
+  destdir=usr
+  for dir in "${destdir}" "${destdir}/share" \
+    "${destdir}/bin" \
+    "${destdir}/share/doc" \
+    "${destdir}/share/doc/${pkgname}" \
+    "${destdir}/share/man" \
+    "${destdir}/share/man/man1" \
+    "${destdir}/share/${pkgname}"
+  do
+    [ -d ${pkgdir}/${dir} ] || mkdir ${pkgdir}/${dir}
+  done
+
+  cp src/jp2a ${pkgdir}/${destdir}/bin/jp2a
+  cp src/any2a ${pkgdir}/${destdir}/bin/any2a
+  cp man/jp2a.1 ${pkgdir}/${destdir}/share/man/man1
+
+  cp AUTHORS ${pkgdir}/${destdir}/share/doc/${PKG}/AUTHORS
+  cp BUGS ${pkgdir}/${destdir}/share/doc/${PKG}/BUGS
+  cp COPYING ${pkgdir}/${destdir}/share/doc/${PKG}/COPYING
+  cp README ${pkgdir}/${destdir}/share/doc/${PKG}/README
+  cp copyright ${pkgdir}/${destdir}/share/doc/${PKG}
+  cp ChangeLog ${pkgdir}/${destdir}/share/doc/${PKG}
+  cp README.md ${pkgdir}/${destdir}/share/doc/${PKG}
+  cp LICENSE ${pkgdir}/${destdir}/share/doc/${PKG}
+  cp NEWS ${pkgdir}/${destdir}/share/doc/${PKG}
+  cp VERSION ${pkgdir}/${destdir}/share/doc/${PKG}
+  pandoc -f gfm README.md | ${SUDO} tee ${pkgdir}/${destdir}/share/doc/${PKG}/README.html > /dev/null
+  gzip -9 ${pkgdir}/${destdir}/share/doc/${PKG}/ChangeLog
+
+  chmod 755 ${pkgdir}/${destdir}/bin/* ${pkgdir}/${destdir}/bin
+}

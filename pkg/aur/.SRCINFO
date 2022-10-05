@@ -1,0 +1,17 @@
+pkgbase = ninvaders
+	pkgdesc = NCurses Invaders Game
+	pkgver = v1.0.1r1
+	pkgrel = 1
+	url = https://github.com/doctorfree/ninvaders
+	install = ninvaders.install
+	arch = x86_64
+	arch = armv7h
+	license = GPL2
+	makedepends = pandoc
+	makedepends = zip
+	depends = ncurses
+	depends = zlib
+	source = ninvaders::git+https://github.com/doctorfree/ninvaders.git
+	sha256sums = SKIP
+
+pkgname = ninvaders
