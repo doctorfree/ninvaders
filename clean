@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo rm -rf dist releases ninvaders pkg/dist/arch pkg/dist/fedora pkg/dist/rpi
+rm -rf cmake_build
