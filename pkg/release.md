@@ -1,4 +1,4 @@
-Any2ascii converts any format image file to an Ascii Art text file.
+Ninvaders is an NCurses text-based version of the Invaders video game.
 
 This release of ninvaders adds support for:
 
@@ -93,4 +93,4 @@ Changes in version 1.0.0 release 1 include:
 * Create packaging for Arch Linux, Fedora, Ubuntu, and Raspberry Pi OS
 * Ported to Arch Linux
 
-See [CHANGELOG](https://github.com/doctorfree/ninvaders/blob/master/CHANGELOG) for a full list of changes in every ninvaders release
+See [ChangeLog](https://github.com/doctorfree/ninvaders/blob/master/ChangeLog) for a full list of changes in every ninvaders release

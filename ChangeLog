@@ -1,3 +1,7 @@
+2022-10-05  Ronald Record <ronaldrecord@gmail.com>
+	* Porting and packaging for Arch Linux, Fedora, Raspberry Pi OS, and Ubuntu
+
+
 2003-10-14  Alexander Hollinger <alexander.hollinger@gmx.net>
 	* LICENSE: renamed gpl.txt to LICENSE
 	* added configure-script: Makefile.in, config.h.in, configure
