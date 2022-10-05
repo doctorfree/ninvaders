@@ -57,3 +57,12 @@ releases/
 pkg/dist/arch/
 pkg/dist/fedora/
 pkg/dist/rpi/
+
+# vim files
+.*.sw[a-z]
+*.un~
+Session.vim
+.netrwhist
+
+#do not ignore .github directory
+!.github

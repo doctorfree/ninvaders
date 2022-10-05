@@ -1,8 +1,26 @@
 post_install() {
-  printf "%b\n" "${mppin}"
+  grep ^games: /etc/group > /dev/null || {
+    groupadd games
+  }
+  id games > /dev/null 2>&1 || {
+    useradd -r -c "Games pseudo-user" -g games -d /opt/games -s /bin/false games
+  }
+  chown games /usr/games/lib/ninvaders
+  chgrp games /usr/games/lib/ninvaders
+  chmod 0755 /usr/games/lib/ninvaders
+  touch /usr/games/lib/ninvaders/highscore
+  chown games /usr/games/lib/ninvaders/highscore
+  chgrp games /usr/games/lib/ninvaders/highscore
+  chmod 0664 /usr/games/lib/ninvaders/highscore
+
+  chown games /usr/games/bin/ninvaders
+  chgrp games /usr/games/bin/ninvaders
+  chmod 04755 /usr/games/bin/ninvaders
+  ln -r -s /usr/games/bin/ninvaders /usr/games/ninvaders
+  printf "%b\n" "${ascin}"
 }
 
-read -d '' mppin <<'EOF'
-Additional info at:
+read -d '' ascin <<'EOF'
+Additional details at:
   - https://github.com/doctorfree/ninvaders#readme
 EOF
