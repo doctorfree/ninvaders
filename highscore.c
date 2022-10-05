@@ -36,7 +36,7 @@
 /* header for highscore file         */
 #define HIGHSCORE_ID                                                           \
   "nInvaders Highscore"
-#define HIGHSCORE_VERSION "0.1" /* version number for highscore file */
+#define HIGHSCORE_VERSION "1.0" /* version number for highscore file */
 
 HighScore highscore; /* todo: not a global variable! */
 

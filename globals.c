@@ -44,8 +44,9 @@ void showVersion() {
   fprintf(stderr, "(C)opyleft 2k2 by Dettus dettus@matrixx-bielefeld.de\n\n");
   fprintf(stderr, "Additional code by Mike Saarna,\n");
   fprintf(stderr, "Sebastian Gutsfeld -> segoh@gmx.net,\n");
-  fprintf(stderr, "Alexander Hollinger -> alexander.hollinger@gmx.net and\n");
   fprintf(stderr, "Matthias Thar -> hiast2@compuserve.de\n");
+  fprintf(stderr, "Alexander Hollinger -> alexander.hollinger@gmx.net and\n");
+  fprintf(stderr, "Ronald Record -> ronaldrecord@gmail.com\n");
 }
 
 /**
