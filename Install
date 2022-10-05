@@ -101,6 +101,8 @@ else
     ARCH=`uname -m`
   else
     SUF=rpm
+    fcversion=`rpm -E %fedora`
+    DIST="fc${fcversion}"
     ARCH=${RPM_ARCH}
   fi
 fi
@@ -166,7 +168,12 @@ do
   then
     PKG="${SCRIPT_DIR}/releases/${PKG_VER}/${PKG_NAME}-v${PKG_VER}r${PKG_REL}-${PACKAGE}-${ARCH}.pkg.tar.${SUF}"
   else
-    PKG="${SCRIPT_DIR}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}-${PKG_REL}.${ARCH}.${SUF}"
+    if [ "${debian}" ]
+    then
+      PKG="${SCRIPT_DIR}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}-${PKG_REL}.${ARCH}.${SUF}"
+    else
+      PKG="${SCRIPT_DIR}/releases/${PKG_VER}/${PKG_NAME}_${PKG_VER}-${PKG_REL}.${DIST}.${ARCH}.${SUF}"
+    fi
   fi
   [ -f "${PKG}" ] || {
     echo "${PKG_NAME}_${PKG_VER}-${PKG_REL}.${ARCH}.${SUF} not found."
